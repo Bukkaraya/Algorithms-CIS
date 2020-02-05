@@ -12,11 +12,15 @@ BINDIR = bin/
 PROGNAME = main
 
 
-all: P11 P12
+all: P11 P12 P21 P22
 
 P11 : P11.c
 
 P12: P12.c
 
+P21: P21.c
+
+P22: P22.c
+
 clean:
-	@rm *.o P11 P12
+	@rm *.o P11 P12 P21 P22
