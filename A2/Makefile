@@ -1,11 +1,11 @@
-#Compiler and flags
+# Compiler and flags
 CC = gcc
 CFLAGS = -Wall -std=c99
 
-#inlcude files directory
+# inlcude files directory
 INCLUDES = -Iinclude
 
-#Directories with source code, object files and binary
+# Directories with source code, object files and binary
 SRCDIR = ./
 BINDIR = bin/
 
@@ -21,6 +21,7 @@ P12: P12.c
 P21: P21.c
 
 P22: P22.c
+	$(CC) -o $@ $@.c -lm
 
 clean:
 	@rm *.o P11 P12 P21 P22

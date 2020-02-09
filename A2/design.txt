@@ -1,0 +1,60 @@
+1.1 Brute Force Inversions:
+
+The brute force implementation of counting number of inversions is a very simply implementation.
+It contains two for loops and counts the inversions left to a number. The ouput for the provided dataset is present below.
+
+Output:
+Total Time to Run: 20739.759766 ms
+Number of Inversions: 623897407
+
+The run time to count the number of inversions is around 21 seconds.
+
+1.2 Divide and Conquer Implementation of Inversions:
+
+The divide and conquer implementation of this problem uses merge sort. Mergesort divdes the array in half and processes each half separately and then combines it. When the sub arrays are merged back, each values of one subarray are compared to the other sub array. If a value from the left sub array is greater than the number in the right subarray, it will be counted as an inversion. Since all numbers to the right of the array are greater, since it is sorted, all of those will also count as an inversion. The total number of inversions will be the inversions from the left sub array plus the inversions from the right subarray. A recursive implementation of this algorithm has been implemented and can be viewed in P12.c. Below is the output for the algorithm,
+
+Output:
+Total Time to Run: 31.962999 ms
+Number of Inversions: 623897407
+
+The inversion count from both the brute force, and the divide and conquer algorithm is the same. However, the divide and conquer implementation ran much faster than the brute force algorithm (650 time faster). This verifies that the divide and conquer algorithm is working as expected and is optimal.
+
+2.1 Brute Force Convex Hull
+
+The brute force implementation of the convex hull is simple and straighforward. For each pair of points, we check if all the remaining points are present on the same side. If they all are on the same side, the pair is added to the set containing all the convex hull points. This is done for all pairs and the final set is sorted based on the x co-ordinate. The output is present below for the given data and a custom dataset, but the points are not listed to keep it brief.
+
+Output: 
+Using file: data2.txt
+Number of Points: 30000
+Total Time to Run: 101425.218750 ms
+Number of Points in Convex Hull: 27
+
+Using file: data3.txt
+Number of Points: 575
+Total Time to Run: 44.988998 ms
+Number of Points in Convex Hull: 18
+
+2.2 QuickHull
+
+The divide and conquer implementation of this algorithm involves the following steps:
+a. Get the point with the minimum x value and the maximum x value. These two points belong to the set of convex hull points. 
+b. Using the two points from the previous step, a line is formed which splits the points into two sections.
+c. For each half of the plane, the point with the maximum distance to the line is added to the convex hull points set. Using the same point, two lines are constructed. 
+d. For each line, the points above the line are taken and the previous step is repeated.
+e. This is done until there are no points left to be evaluated.
+
+Finally the set of convex hull points are sorted using a simple sorting algorithm and displayed to the user. The output for two datasets are present below.
+
+Output:
+
+Using file: data2.txt
+Number of Points: 30000
+Total Time to Run: 6.362000 ms
+Number of Points in Convex Hull: 24
+
+Using file: data3.txt
+Number of Points: 575
+Total Time to Run: 0.325000 ms
+Number of Points in Convex Hull: 18
+
+The divide and conquer algorithm runs much faster than the brute force implementation. The number of convex hull points for data2.txt are different from both. This is because the brute force implementation does not account for co-linear points. The divded and conquer version takes this into account and provides more accurate results.
