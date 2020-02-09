@@ -17,7 +17,7 @@ Output:
 Total Time to Run: 31.962999 ms
 Number of Inversions: 623897407
 
-The inversion count from both the brute force, and the divide and conquer algorithm is the same. However, the divide and conquer implementation ran much faster than the brute force algorithm (650 time faster). This verifies that the divide and conquer algorithm is working as expected and is optimal.
+The inversion count from both the brute force, and the divide and conquer algorithm is the same. However, the divide and conquer implementation ran much faster than the brute force algorithm (650 time faster). This verifies that the divide and conquer algorithm is working as expected and is optimal. The efficiency class of the brute force is O(n^2), and the divide and conquer method is O(nlog(n)).
 
 2.1 Brute Force Convex Hull
 
@@ -57,4 +57,6 @@ Number of Points: 575
 Total Time to Run: 0.325000 ms
 Number of Points in Convex Hull: 18
 
-The divide and conquer algorithm runs much faster than the brute force implementation. The number of convex hull points for data2.txt are different from both. This is because the brute force implementation does not account for co-linear points. The divded and conquer version takes this into account and provides more accurate results.
+The divide and conquer algorithm runs much faster than the brute force implementation. The number of convex hull points for data2.txt are different from both. This is because the brute force implementation does not account for co-linear points. The divded and conquer version takes this into account and provides more accurate results. 
+
+The efficiency class of each algorithm can be verified by looking at the runtime. The quickhull algorithm has an efficiency class of O(nlog(n)), whereas the brute force one has O(n^3).
