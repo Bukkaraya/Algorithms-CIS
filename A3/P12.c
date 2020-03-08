@@ -20,7 +20,6 @@ int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numString
 
 
 int main(int argc, char* argv[]) {
-    struct timeval startTime, endTime;      
     FILE *fp = NULL;
     char fileName[MAX_LEN] = "data_4.txt";
     int numStrings = 0;
@@ -55,17 +54,7 @@ int main(int argc, char* argv[]) {
     printf("Enter the string you want to find anagrams for:\n");
     scanf("%s", anagramString);
 
-    gettimeofday(&startTime, NULL);
     int numAnagrams = optimizedNumAnagrams(anagramString, stringArray, numStrings);
-    gettimeofday(&endTime, NULL);
-
-    float totalRunTime = (endTime.tv_sec - startTime.tv_sec) * 1000000 + 
-		(endTime.tv_usec - startTime.tv_usec);
-
-    totalRunTime /= 1000;
-
-    printf("Total Time to Run: %f ms\n", totalRunTime);
-
     printf("Number of Anagrams: %d\n", numAnagrams);
 
     return 0;
@@ -74,15 +63,34 @@ int main(int argc, char* argv[]) {
 
 int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numStrings) {
     int numAnagrams = 0;
+    struct timeval startTime, endTime;
 
-    qsort((void*) anagramString, strlen(anagramString), sizeof(char), characterCompare);
-    printf("%s\n", anagramString);
+    gettimeofday(&startTime, NULL);
 
+    // Sort each individual string
     for(int i = 0; i < numStrings; i++) {
+        if(strcmp(anagramString, stringArray[i]) == 0) {
+            stringArray[0] = '\0';
+            continue;
+        }
         qsort((void*) stringArray[i], strlen(stringArray[i]), sizeof(char), characterCompare);
     }
 
+    // Sort the input string for comparision
+    qsort((void*) anagramString, strlen(anagramString), sizeof(char), characterCompare);
+
+    // Sort Array of Strings
     qsort((void *) stringArray, numStrings, sizeof(char *), stringCompare);
+
+    gettimeofday(&endTime, NULL);
+    float totalRunTime = (endTime.tv_sec - startTime.tv_sec) * 1000000 + 
+		(endTime.tv_usec - startTime.tv_usec);
+    totalRunTime /= 1000;
+
+    printf("Total Sorting Time: %f ms\n", totalRunTime);
+
+    // Search for number of anagrams in the array by comparisions
+    gettimeofday(&startTime, NULL);
 
     for(int i = 0; i < numStrings; i++) {
         if(strlen(anagramString) != strlen(stringArray[i])) {
@@ -93,8 +101,14 @@ int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numString
         }
     }
 
-    return numAnagrams;
+    gettimeofday(&endTime, NULL);
+    totalRunTime = (endTime.tv_sec - startTime.tv_sec) * 1000000 + 
+		(endTime.tv_usec - startTime.tv_usec);
+    totalRunTime /= 1000;
 
+    printf("Total Search Time: %f ms\n", totalRunTime);
+
+    return numAnagrams;
 }
 
 

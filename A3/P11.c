@@ -70,14 +70,16 @@ int main(int argc, char* argv[]) {
 
 
 int bruteForceNumAnagrams(char* anagramString, char* stringArray[], int numStrings) {
-    printf("Anagram String: %s\n", anagramString);
     int anagramStrLen = strlen(anagramString);
     int numAnagrams = 0;
     int isAnagram = 0;
 
+    printf("------- Found Anagrams -------\n");
+
     for(int i = 0; i < numStrings; i++) {
         isAnagram = TRUE;
-        if(anagramStrLen != strlen(stringArray[i])) {
+        if(anagramStrLen != strlen(stringArray[i]) || 
+            strcmp(anagramString, stringArray[i]) == 0) {
             continue;
         }
 
@@ -104,5 +106,10 @@ int bruteForceNumAnagrams(char* anagramString, char* stringArray[], int numStrin
         }
     }
 
+    if(numAnagrams == 0) {
+        printf("No anagrams found.\n");
+    }
+
+    printf("----------------------------\n");
     return numAnagrams;
 }
