@@ -1,0 +1,4 @@
+Enter the pattern that you would like to search:
+Number of Shifts: 566014
+Total Time to Run: 178694.500000 ms
+Total Occurences: 23
