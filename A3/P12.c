@@ -61,6 +61,7 @@ int main(int argc, char* argv[]) {
 }
 
 
+// Get the number of anagrams of a string
 int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numStrings) {
     int numAnagrams = 0;
     struct timeval startTime, endTime;
@@ -92,16 +93,25 @@ int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numString
     // Search for number of anagrams in the array by comparisions
     gettimeofday(&startTime, NULL);
 
+    printf("------- Found Anagrams -------\n");
     for(int i = 0; i < numStrings; i++) {
         if(strlen(anagramString) != strlen(stringArray[i])) {
             continue;
         }
         if(strcmp(anagramString, stringArray[i]) == 0){
+            printf("%s\n", stringArray[i]);
             numAnagrams++;
         }
     }
 
     gettimeofday(&endTime, NULL);
+
+    if(numAnagrams == 0) {
+        printf("No anagrams found.\n");
+    }
+
+    printf("----------------------------\n");
+
     totalRunTime = (endTime.tv_sec - startTime.tv_sec) * 1000000 + 
 		(endTime.tv_usec - startTime.tv_usec);
     totalRunTime /= 1000;
@@ -112,6 +122,7 @@ int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numString
 }
 
 
+// String compare function for sorting
 int stringCompare(const void* str1, const void* str2) {
     const char *a = *(const char **)str1;
     const char *b = *(const char **)str2;
@@ -119,6 +130,7 @@ int stringCompare(const void* str1, const void* str2) {
     return strcmp(a, b);
 }
 
+// Character comparision function for sorting
 int characterCompare(const void* c1, const void* c2) {
     return *(char *)c1 - *(char *)c2;
 }

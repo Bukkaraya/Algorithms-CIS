@@ -69,6 +69,7 @@ int main(int argc, char* argv[]) {
 }
 
 
+// Get the number of anagrams of a string
 int bruteForceNumAnagrams(char* anagramString, char* stringArray[], int numStrings) {
     int anagramStrLen = strlen(anagramString);
     int numAnagrams = 0;
@@ -76,6 +77,7 @@ int bruteForceNumAnagrams(char* anagramString, char* stringArray[], int numStrin
 
     printf("------- Found Anagrams -------\n");
 
+    // Get all anagrams in the array and print them
     for(int i = 0; i < numStrings; i++) {
         isAnagram = TRUE;
         if(anagramStrLen != strlen(stringArray[i]) || 

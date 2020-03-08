@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-
+// Search for all occurences of a string in a stream of text
 int bruteForceStringSearch(char* pattern, char* text) {
     int numShifts = 0;
     int numOccurences = 0;

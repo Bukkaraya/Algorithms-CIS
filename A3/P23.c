@@ -136,7 +136,7 @@ int boyerMooreStringSearch(char* pattern, char* text, int badSymbolTable[MAX_LEN
     return numOccurences;
 }
 
-
+// Construct the good suffix table used for calculating the shift amount
 void constructGoodSuffixTable(char* pattern, int shiftTable[], int tableSize) {
     char suffix[strlen(pattern)];
     int i = strlen(pattern);
@@ -172,7 +172,7 @@ void constructGoodSuffixTable(char* pattern, int shiftTable[], int tableSize) {
     }
 }
 
-
+// Construct the bad symbol table which is the same table from the horsepool implementation
 void constructBadSymbolTable(char* pattern, int shiftTable[MAX_LEN], int tableSize) {
     for(int i = 0; i < tableSize; i++) {
         shiftTable[i] = strlen(pattern);
@@ -182,5 +182,3 @@ void constructBadSymbolTable(char* pattern, int shiftTable[MAX_LEN], int tableSi
         shiftTable[pattern[i]] = strlen(pattern) - 1 - i;
     }
 }
-
-

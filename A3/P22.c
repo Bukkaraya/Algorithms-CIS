@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-
+// Search for all occurences of a string in a stream of text
 int horspoolsStringMatch(char* pattern, char* text, int shiftTable[MAX_LEN], int tableSize) {
     int currentLocation = strlen(pattern) - 1;
     int i = 0;
@@ -102,7 +102,7 @@ int horspoolsStringMatch(char* pattern, char* text, int shiftTable[MAX_LEN], int
     return numOccurences;
 }
 
-
+// Construct the suffix table for calculating the shift amount 
 void constructShiftTable(char* pattern, int shiftTable[MAX_LEN], int tableSize) {
     for(int i = 0; i < tableSize; i++) {
         shiftTable[i] = strlen(pattern);
