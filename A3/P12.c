@@ -73,7 +73,7 @@ int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numString
     // Sort each individual string
     for(int i = 0; i < numStrings; i++) {
         if(strcmp(anagramString, stringArray[i]) == 0) {
-            stringArray[0] = '\0';
+            stringArray[i][0] = '\0';
             continue;
         }
         qsort((void*) stringArray[i], strlen(stringArray[i]), sizeof(char), characterCompare);
