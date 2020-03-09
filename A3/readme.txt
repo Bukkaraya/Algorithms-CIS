@@ -73,64 +73,64 @@ Q2.4) Analysis of string search programs
 
 The programs were analyzed for 10 words of different lengths and are compared based on number of shifts and total runtime of each program. 
 
-The average ratio for the brute force algorithm: 9.261
-The average ratio for the Horsepool algorithm: 5.3612
+The average ratio for the brute force algorithm: 292,968 shifts / ms
+The average ratio for the Horsepool algorithm: 111,889.4 shifts / ms
 
-The Horsepool algorithm has a lower average ratio of number of shifts to the run time of the program. The number of shifts for the brute force algorithm remains roughly the same for each word as we shift by one each iteration. The run time for the bruteforce is much larger for the different words compared to the Horsepool implementation. The Horsepool algorithm shifts by a precalculated amount each time which reduces the number of shifts made in total. By shifting less the run time of the algorithm also goes down. This leads to a lower ratio compared to the brute force implementation. When the number of letters in the word are large the Horsepool performs much better than the brute force and for smaller letters the Horsepool is only marginally better than the brute force implmentation.
+The Horsepool algorithm has a lower average ratio of number of shifts per milliseconds. The number of shifts for the brute force algorithm remains roughly the same for each word as we shift by one character each iteration. The run time for the bruteforce is much larger for the different words compared to the Horsepool implementation. The Horsepool algorithm shifts by a precalculated amount each time which reduces the number of shifts made in total. By shifting less the run time of the algorithm also goes down. This leads to a lower ratio compared to the brute force implementation. When the number of letters in the word are large the Horsepool performs much better than the brute force and for smaller letters the Horsepool is only marginally better than the brute force implmentation. Overall Horsepool's Algorithm performs much better than the brute force implementation.
 
 The Boyer Moore algorithm is similar to the Horsepool algorithm and has roughly the same results. The results for different words are presented below.
 
 Word 1: Economics
-+----------------------------+-------------+-----------+-------------+
-|                            | Brute Force | Horsepool | Boyer-Moore |
-+----------------------------+-------------+-----------+-------------+
-| Number of Occurences       | 236         | 236       | 236         |
-+----------------------------+-------------+-----------+-------------+
-| Number of Shifts           | 3300437     | 428081    | 427845      |
-+----------------------------+-------------+-----------+-------------+
-| Runtime (ms)               | 221117.01   | 39979.42  | 33172.37    |
-+----------------------------+-------------+-----------+-------------+
-| Ratio (no. shifts/runtime) | 14.926      | 10.70     | 12.89       |
-+----------------------------+-------------+-----------+-------------+
++----------------------------+-------------+-------------+-------------+
+|                            | Brute Force | Horsepool   | Boyer-Moore |
++----------------------------+-------------+-------------+-------------+
+| Number of Occurences       | 236         | 236         | 236         |
++----------------------------+-------------+-------------+-------------+
+| Number of Shifts           | 3300437     | 428081      | 427845      |
++----------------------------+-------------+-------------+-------------+
+| Runtime (ms)               | 9.499       | 3.66        | 4.47        |
++----------------------------+-------------+-------------+-------------+
+| Ratio (no. shifts/runtime) | 347450.9948 | 116962.0219 | 95714.7651  |
++----------------------------+-------------+-------------+-------------+
 
 Word 2: information
-+----------------------------+-------------+-----------+-------------+
-|                            | Brute Force | Horsepool | Boyer-Moore |
-+----------------------------+-------------+-----------+-------------+
-| Number of Occurences       | 171         | 171       | 171         |
-+----------------------------+-------------+-----------+-------------+
-| Number of Shifts           | 3300435     | 391699    | 388677      |
-+----------------------------+-------------+-----------+-------------+
-| Runtime (ms)               | 275093.09   | 49206.25  | 52721.24    |
-+----------------------------+-------------+-----------+-------------+
-| Ratio (no. shifts/runtime) | 11.997      | 7.960351  | 7.372304    |
-+----------------------------+-------------+-----------+-------------+
++----------------------------+-------------+-------------+-------------+
+|                            | Brute Force | Horsepool   | Boyer-Moore |
++----------------------------+-------------+-------------+-------------+
+| Number of Occurences       | 171         | 171         | 171         |
++----------------------------+-------------+-------------+-------------+
+| Number of Shifts           | 3300435     | 391699      | 388677      |
++----------------------------+-------------+-------------+-------------+
+| Runtime (ms)               | 13.14       | 4.18        | 4.8         |
++----------------------------+-------------+-------------+-------------+
+| Ratio (no. shifts/runtime) | 251174.6575 | 93707.89474 | 80974.375   |
++----------------------------+-------------+-------------+-------------+
 
 Word 3: under
-+----------------------------+-------------+------------+-------------+
-|                            | Brute Force | Horsepool  | Boyer-Moore |
-+----------------------------+-------------+------------+-------------+
-| Number of Occurences       | 1271        | 1271       | 1271        |
-+----------------------------+-------------+------------+-------------+
-| Number of Shifts           | 3300441     | 745308     | 744037      |
-+----------------------------+-------------+------------+-------------+
-| Runtime (ms)               | 468852.21   | 197673.89  | 210978.68   |
-+----------------------------+-------------+------------+-------------+
-| Ratio (no. shifts/runtime) | 7.039405872 | 3.77039173 | 3.526598043 |
-+----------------------------+-------------+------------+-------------+
++----------------------------+-------------+-------------+-------------+
+|                            | Brute Force | Horsepool   | Boyer-Moore |
++----------------------------+-------------+-------------+-------------+
+| Number of Occurences       | 1271        | 1271        | 1271        |
++----------------------------+-------------+-------------+-------------+
+| Number of Shifts           | 3300441     | 745308      | 744037      |
++----------------------------+-------------+-------------+-------------+
+| Runtime (ms)               | 11.28       | 6.247       | 8.315       |
++----------------------------+-------------+-------------+-------------+
+| Ratio (no. shifts/runtime) | 292592.2872 | 119306.5471 | 89481.29886 |
++----------------------------+-------------+-------------+-------------+
 
 Word 4: asdfgh
-+----------------------------+-------------+------------+-------------+
-|                            | Brute Force | Horsepool  | Boyer-Moore |
-+----------------------------+-------------+------------+-------------+
-| Number of Occurences       | 0           | 0          | 0           |
-+----------------------------+-------------+------------+-------------+
-| Number of Shifts           | 3300440     | 587590     | 587590      |
-+----------------------------+-------------+------------+-------------+
-| Runtime (ms)               | 341418.5    | 125161.67  | 124879.09   |
-+----------------------------+-------------+------------+-------------+
-| Ratio (no. shifts/runtime) | 9.666845821 | 4.69464813 | 4.705271315 |
-+----------------------------+-------------+------------+-------------+
++----------------------------+-------------+-------------+-------------+
+|                            | Brute Force | Horsepool   | Boyer-Moore |
++----------------------------+-------------+-------------+-------------+
+| Number of Occurences       | 0           | 0           | 0           |
++----------------------------+-------------+-------------+-------------+
+| Number of Shifts           | 3300440     | 587590      | 587590      |
++----------------------------+-------------+-------------+-------------+
+| Runtime (ms)               | 13.15       | 4.494       | 5.621       |
++----------------------------+-------------+-------------+-------------+
+| Ratio (no. shifts/runtime) | 250984.0304 | 130749.8887 | 104534.7803 |
++----------------------------+-------------+-------------+-------------+
 
 Word 5: Statistics
 +----------------------------+-------------+-------------+-------------+
@@ -140,22 +140,22 @@ Word 5: Statistics
 +----------------------------+-------------+-------------+-------------+
 | Number of Shifts           | 3300436     | 396692      | 390679      |
 +----------------------------+-------------+-------------+-------------+
-| Runtime (ms)               | 288946.65   | 61834.86    | 68407.8     |
+| Runtime (ms)               | 9.69        | 3.36        | 4.287       |
 +----------------------------+-------------+-------------+-------------+
-| Ratio (no. shifts/runtime) | 11.42230235 | 6.415345648 | 5.711030029 |
+| Ratio (no. shifts/runtime) | 340602.2704 | 118063.0952 | 91131.09401 |
 +----------------------------+-------------+-------------+-------------+
 
 Word 6: substitution
 +----------------------------+-------------+-------------+-------------+
-| a                          | Brute Force | Horsepool   | Boyer-Moore |
+|                            | Brute Force | Horsepool   | Boyer-Moore |
 +----------------------------+-------------+-------------+-------------+
 | Number of Occurences       | 2           | 2           | 2           |
 +----------------------------+-------------+-------------+-------------+
 | Number of Shifts           | 3300434     | 334882      | 334880      |
 +----------------------------+-------------+-------------+-------------+
-| Runtime (ms)               | 319014.93   | 69426.39    | 80810.62    |
+| Runtime (ms)               | 12.07       | 3.26        | 3.964       |
 +----------------------------+-------------+-------------+-------------+
-| Ratio (no. shifts/runtime) | 10.34570388 | 4.823554847 | 4.144009785 |
+| Ratio (no. shifts/runtime) | 273441.0936 | 102724.5399 | 84480.32291 |
 +----------------------------+-------------+-------------+-------------+
 
 Word 7: detailedinformation
@@ -166,35 +166,35 @@ Word 7: detailedinformation
 +----------------------------+-------------+-------------+-------------+
 | Number of Shifts           | 3300427     | 273608      | 263672      |
 +----------------------------+-------------+-------------+-------------+
-| Runtime (ms)               | 332323.9    | 74425.45    | 82887.6     |
+| Runtime (ms)               | 11.372      | 2.85        | 3.333       |
 +----------------------------+-------------+-------------+-------------+
-| Ratio (no. shifts/runtime) | 9.931356126 | 3.676269341 | 3.181078955 |
+| Ratio (no. shifts/runtime) | 290223.9712 | 96002.80702 | 79109.51095 |
 +----------------------------+-------------+-------------+-------------+
 
 Word 8: help
 +----------------------------+-------------+-------------+-------------+
-|                            | Brute Force | Horsepool   | Boyer-Moore |
+| a                          | Brute Force | Horsepool   | Boyer-Moore |
 +----------------------------+-------------+-------------+-------------+
 | Number of Occurences       | 28          | 28          | 28          |
 +----------------------------+-------------+-------------+-------------+
 | Number of Shifts           | 3300442     | 895319      | 895290      |
 +----------------------------+-------------+-------------+-------------+
-| Runtime (ms)               | 475551.37   | 276841.18   | 277885.93   |
+| Runtime (ms)               | 11.341      | 7.5         | 8.486       |
 +----------------------------+-------------+-------------+-------------+
-| Ratio (no. shifts/runtime) | 6.94024286  | 3.234052824 | 3.221789603 |
+| Ratio (no. shifts/runtime) | 291018.6051 | 119375.8667 | 105502.0033 |
 +----------------------------+-------------+-------------+-------------+
 
 Word 9: students
 +----------------------------+-------------+-------------+-------------+
 |                            | Brute Force | Horsepool   | Boyer-Moore |
 +----------------------------+-------------+-------------+-------------+
-| Number of Occurences       | 4201        | 4201        | 4201        |
+| Number of Occurences       | 4021        | 4021        | 4021        |
 +----------------------------+-------------+-------------+-------------+
 | Number of Shifts           | 3300438     | 505986      | 500284      |
 +----------------------------+-------------+-------------+-------------+
-| Runtime (ms)               | 559961.5    | 97394.75    | 114115.66   |
+| Runtime (ms)               | 12.36       | 4.58        | 5.84        |
 +----------------------------+-------------+-------------+-------------+
-| Ratio (no. shifts/runtime) | 5.894044501 | 5.195208161 | 4.384008295 |
+| Ratio (no. shifts/runtime) | 267025.7282 | 110477.2926 | 85665.06849 |
 +----------------------------+-------------+-------------+-------------+
 
 Word 10: Chapter
@@ -205,7 +205,7 @@ Word 10: Chapter
 +----------------------------+-------------+-------------+-------------+
 | Number of Shifts           | 3300439     | 566014      | 565991      |
 +----------------------------+-------------+-------------+-------------+
-| Runtime (ms)               | 741245.12   | 178694.5    | 204398.59   |
+| Runtime (ms)               | 10.15       | 5.075       | 6.06        |
 +----------------------------+-------------+-------------+-------------+
-| Ratio (no. shifts/runtime) | 4.452560848 | 3.167495362 | 2.769055305 |
+| Ratio (no. shifts/runtime) | 325166.4039 | 111529.8522 | 93397.85479 |
 +----------------------------+-------------+-------------+-------------+

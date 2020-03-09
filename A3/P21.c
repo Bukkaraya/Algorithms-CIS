@@ -43,8 +43,7 @@ int main(int argc, char* argv[]) {
 
     fread(text, 1, fileLength, fp);
 
-    fclose(fp);
-
+    
     char pattern[MAX_LEN] = {0};
 
     printf("Enter the pattern that you would like to search:\n");
@@ -57,13 +56,15 @@ int main(int argc, char* argv[]) {
     gettimeofday(&endTime, NULL);
 
     float totalRunTime = (endTime.tv_sec - startTime.tv_sec) * 1000000 + 
-		(endTime.tv_usec - startTime.tv_usec);
+	 	(endTime.tv_usec - startTime.tv_usec);
 
     totalRunTime /= 1000;
 
     printf("Total Time to Run: %f ms\n", totalRunTime);
     printf("Total Occurences: %d\n", numOccurences);
 
+    free(text);
+    fclose(fp);
     return 0;
 }
 
@@ -71,13 +72,16 @@ int main(int argc, char* argv[]) {
 int bruteForceStringSearch(char* pattern, char* text) {
     int numShifts = 0;
     int numOccurences = 0;
+    int j = 0;
+    int textLength = strlen(text);
+    int patternLength = strlen(pattern);
 
-    for(int i = 0; i < strlen(text) - strlen(pattern); i++) {
-        int j = 0;
-        while(j < strlen(pattern) && text[i + j] == pattern[j]) {
+    for(int i = 0; i < textLength - patternLength; i++) {
+        j = 0;
+        while(j < patternLength && text[i + j] == pattern[j]) {
             j++;
         }
-        if(j == strlen(pattern)) {
+        if(j == patternLength) {
             numOccurences++;
         }
         numShifts++;

@@ -17,6 +17,7 @@
 int stringCompare(const void* str1, const void* str2);
 int characterCompare(const void* c1, const void* c2);
 int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numStrings);
+void printAnagrams(char* anagramString, char* stringArray[], int numStrings);
 
 
 int main(int argc, char* argv[]) {
@@ -53,7 +54,8 @@ int main(int argc, char* argv[]) {
     char anagramString[MAX_LEN];
     printf("Enter the string you want to find anagrams for:\n");
     scanf("%s", anagramString);
-
+    // Print anagrams before, because optimized version modifies the array.
+    printAnagrams(anagramString, stringArray, numStrings);
     int numAnagrams = optimizedNumAnagrams(anagramString, stringArray, numStrings);
     printf("Number of Anagrams: %d\n", numAnagrams);
 
@@ -93,24 +95,17 @@ int optimizedNumAnagrams(char* anagramString, char* stringArray[], int numString
     // Search for number of anagrams in the array by comparisions
     gettimeofday(&startTime, NULL);
 
-    printf("------- Found Anagrams -------\n");
     for(int i = 0; i < numStrings; i++) {
         if(strlen(anagramString) != strlen(stringArray[i])) {
             continue;
         }
         if(strcmp(anagramString, stringArray[i]) == 0){
-            printf("%s\n", stringArray[i]);
             numAnagrams++;
         }
     }
 
     gettimeofday(&endTime, NULL);
 
-    if(numAnagrams == 0) {
-        printf("No anagrams found.\n");
-    }
-
-    printf("----------------------------\n");
 
     totalRunTime = (endTime.tv_sec - startTime.tv_sec) * 1000000 + 
 		(endTime.tv_usec - startTime.tv_usec);
@@ -133,4 +128,50 @@ int stringCompare(const void* str1, const void* str2) {
 // Character comparision function for sorting
 int characterCompare(const void* c1, const void* c2) {
     return *(char *)c1 - *(char *)c2;
+}
+
+
+void printAnagrams(char* anagramString, char* stringArray[], int numStrings) {
+    int anagramStrLen = strlen(anagramString);
+    int numAnagrams = 0;
+    int isAnagram = 0;
+
+    printf("------- Found Anagrams -------\n");
+
+    // Get all anagrams in the array and print them
+    for(int i = 0; i < numStrings; i++) {
+        isAnagram = TRUE;
+        if(anagramStrLen != strlen(stringArray[i]) || 
+            strcmp(anagramString, stringArray[i]) == 0) {
+            continue;
+        }
+
+        int anagramMap[MAX_LEN];
+
+        for(int k = 0; k < MAX_LEN; k++) {
+            anagramMap[k] = 0;
+        }
+
+        for(int j = 0; j < anagramStrLen; j++) {
+            anagramMap[anagramString[j]]++;
+        }
+
+        for(int j = 0; j < anagramStrLen; j++) {
+            if(--anagramMap[stringArray[i][j]] < 0) {
+                isAnagram = FALSE;
+                break;
+            }
+        }
+
+        if(isAnagram) {
+            printf("%s\n", stringArray[i]);
+            numAnagrams++;
+        }
+    }
+
+    if(numAnagrams == 0) {
+        printf("No anagrams found.\n");
+    }
+
+    printf("----------------------------\n");
 }

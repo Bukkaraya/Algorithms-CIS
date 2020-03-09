@@ -86,17 +86,19 @@ int boyerMooreStringSearch(char* pattern, char* text, int badSymbolTable[MAX_LEN
     int i = 0;
     int numOccurences = 0;
     int numShifts = 0;
+    int textLength = strlen(text);
+    int patternLength = strlen(pattern);
 
-    while(currentLocation < strlen(text)) {
+    while(currentLocation < textLength) {
         i = 0;
-        while(i < strlen(pattern) && 
-        text[currentLocation - i - 1] == pattern[strlen(pattern) - 1 - i]) {
+        while(i < patternLength && 
+        text[currentLocation - i - 1] == pattern[patternLength - 1 - i]) {
             i++;
         }
 
-        if(i == strlen(pattern)) {
+        if(i == patternLength) {
             numOccurences++;
-            currentLocation += strlen(pattern);
+            currentLocation += patternLength;
             continue;
         }
 
@@ -116,7 +118,7 @@ int boyerMooreStringSearch(char* pattern, char* text, int badSymbolTable[MAX_LEN
         if(i == 0) {
             goodSymbolShift = 1;
         } else {
-            goodSymbolShift = goodSuffixTable[strlen(pattern) - i];
+            goodSymbolShift = goodSuffixTable[patternLength - i];
         }
 
         // Calculate shift length which is the maximum of good suffix shift

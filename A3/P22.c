@@ -78,14 +78,16 @@ int horspoolsStringMatch(char* pattern, char* text, int shiftTable[MAX_LEN], int
     int i = 0;
     int numOccurences = 0;
     int numShifts = 0;
+    int patternLength = strlen(pattern);
+    int textLength = strlen(text);
 
-    while(currentLocation < strlen(text)) {
+    while(currentLocation < textLength) {
         i = 0;
-        while(i < strlen(pattern) && 
-        text[currentLocation - i] == pattern[strlen(pattern) - 1 - i ]) {
+        while(i < patternLength && 
+        text[currentLocation - i] == pattern[patternLength - 1 - i ]) {
             i++;
         }
-        if(i == strlen(pattern)) {
+        if(i == patternLength) {
             numOccurences++;
         }
         if(isascii(text[currentLocation])) {
