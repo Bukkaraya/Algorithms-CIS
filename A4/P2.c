@@ -22,7 +22,6 @@ typedef struct WordProbability {
 
 typedef struct treeNode {
     WordProbability word;
-    float cost;
     struct treeNode* left;
     struct treeNode* right;
 } TreeNode;
@@ -34,6 +33,11 @@ typedef struct Tree {
 
 
 int stringCompare(const void* str1, const void* str2);
+void printTreeNode(TreeNode* node);
+Tree* constructDictionary(WordProbability words[], int numWords);
+TreeNode* createTree(WordProbability words[], int start, int end);
+int searchDictionary(Tree* dictionary, char* key);
+int searchTree(TreeNode* root, char* key) ;
 
 
 int main(int argc, char* argv[]) {
@@ -85,14 +89,102 @@ int main(int argc, char* argv[]) {
         numSortedWords++;
     }
 
-    for(int i = 0; i < numSortedWords; i++) {
-        printf("%s (%f)\n", sortedWords[i].text, sortedWords[i].probability);
+    // for(int i = 0; i < numSortedWords; i++) {
+    //     printf("%s (%f)\n", sortedWords[i].text, sortedWords[i].probability);
+    // }
+
+    // printf("Number of Unique Words: %d\n", numSortedWords);
+
+    Tree* dictionary = constructDictionary(sortedWords, numSortedWords);
+
+    char key[MAX_LEN];
+    printf("Enter a key:\n");
+    scanf("%s", key);
+
+    int keyFound = searchDictionary(dictionary, key);
+
+    if(!keyFound) {
+        printf("Not Found.\n");
     }
 
-    printf("Number of Unique Words: %d\n", numSortedWords);
-    
+    return 0;
 }
 
+
+int searchDictionary(Tree* dictionary, char* key) {
+    int keyFound = FALSE;
+    keyFound = searchTree(dictionary->root, key);
+
+    return keyFound;
+}
+
+int searchTree(TreeNode* root, char* key) {
+    int isFound = FALSE;
+
+    if(root == NULL) {
+        return isFound;
+    }
+
+    if(isFound) {
+        return isFound;
+    }
+
+    int comparisionResult = strcmp(key, root->word.text);
+    printf("Compared with %s (%f), ", root->word.text, root->word.probability);
+
+    if(comparisionResult > 0) {
+        printf("go right subtree.\n");
+        isFound = searchTree(root->right, key);
+    } else if(comparisionResult < 0) {
+        printf("go left subtree.\n");
+        isFound = searchTree(root->left, key);
+    } else {
+        printf("found.\n");
+        isFound = TRUE;
+        return isFound;
+    }
+
+    return isFound;
+}
+
+
+Tree* constructDictionary(WordProbability words[], int numWords) {
+    Tree* greedyTree = malloc(sizeof(Tree));
+    greedyTree->root = NULL;
+
+    greedyTree->root = createTree(words, 0, numWords);
+
+    return greedyTree;
+}
+
+TreeNode* createTree(WordProbability words[], int start, int end) {
+    if(start > end || start == end) {
+        return NULL;
+    }
+
+    WordProbability wordWithMaxProb = words[start];
+    int maxProbIndex = start;
+
+    for(int i = start + 1; i < end; i++) {
+        if(words[i].probability > wordWithMaxProb.probability) {
+            wordWithMaxProb = words[i];
+            maxProbIndex = i;
+        }
+    }
+
+    TreeNode* root = malloc(sizeof(TreeNode));
+    root->word = wordWithMaxProb;
+
+    root->left = createTree(words, start, maxProbIndex);
+    root->right = createTree(words, maxProbIndex + 1, end);
+
+    return root;
+}
+
+
+void printTreeNode(TreeNode* node) {
+    printf("TreeNode<Word: %s, Probability: %f>\n", node->word.text, node->word.probability);
+}
 
 // String compare function for sorting
 int stringCompare(const void* str1, const void* str2) {
