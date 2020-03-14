@@ -40,6 +40,7 @@ TreeNode* constructTree(float** costTable, float** rootTable, WordProbability* w
 void printTreeNode(TreeNode* node);
 int searchDictionary(Tree* dictionary, char* key);
 int searchTree(TreeNode* root, char* key);
+void destroyTree(TreeNode* root);
 
 
 int main(int argc, char* argv[]) {
@@ -91,12 +92,6 @@ int main(int argc, char* argv[]) {
         numSortedWords++;
     }
 
-    // for(int i = 0; i < numSortedWords; i++) {
-    //     printf("%s (%f)\n", sortedWords[i].text, sortedWords[i].probability);
-    // }
-
-    // printf("Number of Unique Words: %d\n", numSortedWords);
-
     int tableSize = numSortedWords + 1;
 
     float** costTable = malloc(tableSize * sizeof(float *));
@@ -138,7 +133,39 @@ int main(int argc, char* argv[]) {
         printf("Not Found.\n");
     }
 
+
+    // Free Used Memory
+    for(int i = 0; i < numWords; i++) {
+        free(words[i]);
+    }
+
+    for(int i = 0; i < tableSize; i++) {
+        free(costTable[i]);
+        free(rootTable[i]);
+    }
+
+    free(costTable);
+    free(rootTable);
+
+    destroyTree(dictionary->root);
+    free(dictionary);
+
+    fclose(fp);
+
     return 0;
+}
+
+
+void destroyTree(TreeNode* root) {
+    if(root == NULL) {
+        return;
+    }
+
+    destroyTree(root->left);
+    destroyTree(root->right);
+    free(root);
+
+    return;
 }
 
 
