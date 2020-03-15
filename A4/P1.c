@@ -188,7 +188,7 @@ int searchTree(TreeNode* root, char* key) {
     }
 
     int comparisionResult = strcmp(key, root->word.text);
-    printf("Compared with %s (%f), ", root->word.text, root->cost);
+    printf("Compared with %s (%.2f), ", root->word.text, root->cost);
 
     if(comparisionResult > 0) {
         printf("go right subtree.\n");
